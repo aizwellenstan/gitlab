@@ -5,9 +5,9 @@ GitLab is a complete DevOps platform, delivered as a single application.
 ## Install
 1. Edit `<<>>` in docker-compose.yml, and run below command.
 
-  ```
-  $ docker-compose up -d
-  ```
+    ```
+    $ docker-compose up -d
+    ```
 
 1. Access your sever, and input `root` user password.
 
