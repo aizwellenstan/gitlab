@@ -1,0 +1,36 @@
+version: '3'
+
+# Ref.) config 
+# https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/files/gitlab-config-template/gitlab.rb.template
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:12.5.0-ce.0
+    container_name: gitlab-ce
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://<<YOUR SERVER ADDRESS>>'
+        gitlab_rails['lfs_enabled'] = true
+        gitlab_rails['time_zone'] = '<<YOUR TIMEZONE>>'
+        gitlab_rails['gitlab_email_enabled'] = true
+        gitlab_rails['gitlab_email_from'] = '<<YOUR ADMIN EMAIL>>'
+        gitlab_rails['gitlab_email_display_name'] = '<<YOUR ADMIN NAME>>'
+        gitlab_rails['gitlab_email_reply_to'] = '<<YOUR ADMIN EMAIL>>'
+        gitlab_rails['gitlab_email_subject_suffix'] = 'GitLab'
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "<<SMTP SERVER ADDRESS>>"
+        gitlab_rails['smtp_port'] = <<SMTP SERVER PORT>>
+        gitlab_rails['smtp_user_name'] = "<<SMTP USER>>"
+        gitlab_rails['smtp_password'] = "<<SMTP PASSWORD>>"
+        gitlab_rails['smtp_domain'] = "<<EMAIL DOMAIN>>"
+        gitlab_rails['smtp_authentication'] = "login"
+        gitlab_rails['smtp_enable_starttls_auto'] = false
+        gitlab_rails['smtp_tls'] = true
+    ports:
+      - <<YOUR HTTP PORT>>:80
+      - <<YOUR HTTPS PORT>>:443
+    volumes:
+      - <<YOUR DIRECTORY PATH>>:/etc/gitlab
+      - <<YOUR DIRECTORY PATH>>:/var/log/gitlab
+      - <<YOUR DIRECTORY PATH>>:/var/opt/gitlab
+    restart: always
